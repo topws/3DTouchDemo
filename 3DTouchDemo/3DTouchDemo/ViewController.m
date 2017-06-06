@@ -83,7 +83,7 @@
 //AppIcon快捷操作
 -(void)receiveShortcutItem:(NSNotification *)object{
     NSString * type = [NSString stringWithFormat:@"%@",object.object];
-    if ([type isEqualToString:@"three"]) {
+    if ([type isEqualToString:@"three"]) {//系统分享
         // 2.创建分享的控制器
         SLComposeViewController *composeVc = [SLComposeViewController composeViewControllerForServiceType:@"com.tencent.xin.sharetimeline"];
         
@@ -91,7 +91,7 @@
         [composeVc setInitialText:@"balabalabala..."];
         
         // 2.2.添加一个图片
-        [composeVc addImage:[UIImage imageNamed:@"gray_advices"]];
+        [composeVc addImage:[UIImage imageNamed:@"gray_personal"]];
         
         // 2.3.添加一个链接
         [composeVc addURL:[NSURL URLWithString:@"www.baidu.com"]];
