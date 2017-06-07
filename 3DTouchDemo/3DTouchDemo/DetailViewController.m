@@ -17,19 +17,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     self.view.backgroundColor = [UIColor whiteColor];
-    
-    //按照url初始化safari控制器并调整
-    
 }
-//Web view peek and pop API (HTML链接预览功能)
--(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
+#pragma mark -
+#pragma mark   ==============Web view peek and pop API (HTML链接预览功能)==============
+-(void)touchesEnded:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
+{
     
     SFSafariViewController *sf = [[SFSafariViewController alloc]initWithURL:[NSURL URLWithString:@"http://www.baidu.com"]];
     [self.navigationController pushViewController:sf animated:YES];
 }
-//Force Properties
+
+#pragma mark -
+#pragma mark   ==============Force Properties（按压力度）==============
 -(void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event{
     
     if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
@@ -39,6 +39,9 @@
         
     }
 }
+
+#pragma mark -
+#pragma mark   ==============预览页上滑出现的按钮==============
 -(NSArray<id<UIPreviewActionItem>> *)previewActionItems{
     UIPreviewAction * action = [UIPreviewAction actionWithTitle:@"action1" style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
         NSLog(@"PreViewAction1");

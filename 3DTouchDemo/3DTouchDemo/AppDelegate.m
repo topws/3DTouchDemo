@@ -15,7 +15,6 @@
 
 @implementation AppDelegate
 
-//Home Screen Quick Actions（主屏幕快捷操作)
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
     self.window = [[UIWindow alloc]initWithFrame:[UIScreen mainScreen].bounds];
@@ -26,19 +25,21 @@
     [self.window makeKeyAndVisible];
     
     CGFloat currentDeviceVersionFloat = [[[UIDevice currentDevice] systemVersion] floatValue];
+    
     if (currentDeviceVersionFloat >= 9.0) {
         //添加 自定义的ShortcutItem
         [self addShortcutItems:application];
     }
-    
-    
     return YES;
 }
+
+//Home Screen Quick Actions（主屏幕快捷操作)
 -(void)application:(UIApplication *)application performActionForShortcutItem:(UIApplicationShortcutItem *)shortcutItem completionHandler:(void (^)(BOOL))completionHandler{
 
     [[NSNotificationCenter defaultCenter]postNotificationName:@"shortcutItemNotify" object:shortcutItem.type];
 }
 
+//add ShortcutItem
 -(void)addShortcutItems:(UIApplication *)application{
     if (application.shortcutItems.count == 0) {//备注：如果加上此判断，3dtouch只会走一次，如果内容有变更，必须卸载再安装才可以
         

@@ -10,8 +10,8 @@
 #import "DetailViewController.h"
 #import <Social/Social.h>
 @interface ViewController ()<UITableViewDelegate,UITableViewDataSource,UIViewControllerPreviewingDelegate>
-@property (nonatomic,strong)UITableView * tab;
 
+@property (nonatomic,strong)UITableView * tab;
 @property (nonatomic,strong)NSArray * dataArr;
 @end
 
@@ -53,8 +53,11 @@
         NSLog(@"该设备不支持3DTouch");
     }
 }
-//UIViewControllerPreviewingDelegate
--(UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location{
+
+#pragma mark -
+#pragma mark   ==============UIViewControllerPreviewingDelegate==============
+-(UIViewController *)previewingContext:(id<UIViewControllerPreviewing>)previewingContext viewControllerForLocation:(CGPoint)location
+{
     //location 按压的区域
     NSIndexPath * indexP = [self.tab indexPathForRowAtPoint:location];
     UITableViewCell * cell = [self.tab cellForRowAtIndexPath:indexP];
@@ -80,7 +83,9 @@
 {
     [self.navigationController pushViewController:viewControllerToCommit animated:NO];
 }
-//AppIcon快捷操作
+
+#pragma mark -
+#pragma mark   ==============AppIcon快捷操作==============
 -(void)receiveShortcutItem:(NSNotification *)object{
     NSString * type = [NSString stringWithFormat:@"%@",object.object];
     if ([type isEqualToString:@"three"]) {//系统分享
@@ -118,17 +123,23 @@
     vc.title = type;
     [self.navigationController pushViewController:vc animated:YES];
 }
-//TableViewDelegate & DataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+
+#pragma mark -
+#pragma mark   ==============TableViewDelegate & DataSource==============
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return self.dataArr.count;
-}- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
     UITableViewCell * cell = [tableView dequeueReusableCellWithIdentifier:@"UITableViewCell"];
     cell.textLabel.text = self.dataArr[indexPath.row];
     return cell;
 }
--(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    
     DetailViewController * vc = [[DetailViewController alloc]init];
     vc.title = self.dataArr[indexPath.row];
     [self.navigationController pushViewController:vc animated:YES];
